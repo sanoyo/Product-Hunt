@@ -3,3 +3,6 @@ node_modules/
 
 # Ignore js
 js/
+
+# Ignore Image
+public/img/
