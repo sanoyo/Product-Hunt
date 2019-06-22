@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductList from "../Product/ProductList"
+import ProductList from '../Product/ProductList';
 
 class HomePage extends React.Component {
   constructor() {
@@ -43,12 +43,13 @@ class HomePage extends React.Component {
 
         <section>
           <section className="container">
-          {
-            this.state.productList
-            ?
-            <ProductList productList={this.state}
-          }
-          <ProductList productList={this.state.productList}/>
+            {
+              this.state.productList
+              ?
+              <ProductList productList={this.state.productList} />
+              :
+              null
+            }
           </section>
         </section>
       </section>
