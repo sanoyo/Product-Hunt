@@ -1,4 +1,5 @@
 import React from 'react';
+import Popup from './Popup';
 
 class Navbar extends React.Component {
   renderProductSearch() {
@@ -25,10 +26,13 @@ class Navbar extends React.Component {
 
   render() {
     return (
-      <section className="navbar">
-        {this.renderProductSearch()}
-        {this.renderLogo()}
-        {this.renderUser()}
+      <section>
+        <section className="navbar">
+          {this.renderProductSearch()}
+          {this.renderLogo()}
+          {this.renderUser()}
+        </section>
+        <Popup/>
       </section>
     );
   };
