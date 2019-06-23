@@ -1,6 +1,6 @@
 import React from 'react';
 import LoginPopup from './LoginPopup';
-import PostPopup from './PostPopup'
+import PostPopup from './PostPopup';
 
 class Navbar extends React.Component {
   constructor() {
@@ -24,13 +24,13 @@ class Navbar extends React.Component {
         <input className="product-search" placeholder="SEARCH" />
       </section>
     );
-  };
+  }
 
   renderLogo() {
     return (
-      <a href="#"><img src="/img/favicon.ico" /></a>
+      <a href="#"><img src="/img/favicon.ico"/></a>
     );
-  };
+  }
 
   renderUser() {
     return (
@@ -38,6 +38,7 @@ class Navbar extends React.Component {
         {
           this.props.user
           ?
+          // Display Post link here
           <section>
             <span>
               <a href="#" onClick={this.showPopup} className="login-btn">POST</a>
@@ -45,16 +46,15 @@ class Navbar extends React.Component {
             <PostPopup status={this.state.popupStatus} hidePopup={this.hidePopup}/>
           </section>
           :
+          // Display Login link here
           <section>
-            <span>
-              <a href="#" onClick={this.showPopup} className="login-btn">Login</a>
-              <LoginPopup status={this.state.popupStatus} hidePopup={this.hidePopup}/>
-            </span>
+            <a href="#" onClick={this.showPopup} className="login-btn">LOGIN</a>
+            <LoginPopup status={this.state.popupStatus} hidePopup={this.hidePopup}/>
           </section>
         }
       </section>
     );
-  };
+  }
 
   render() {
     return (
@@ -66,7 +66,7 @@ class Navbar extends React.Component {
         </section>
       </section>
     );
-  };
+  }
 }
 
 export default Navbar;
