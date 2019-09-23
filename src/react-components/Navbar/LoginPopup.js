@@ -1,19 +1,11 @@
 import React from 'react';
 import Popup from './Popup';
-import Firebase from 'firebase';
+import Actions from '../../actions';
 
 class LoginPopup extends React.Component {
   handleLogin = () => {
-    // TODO Facebook Login動作しない
-    var provider = new Firebase.auth.FacebookAuthProvider();
-    provider.addScope('public_profile');
-
-    Firebase.auth().signInWithPopup(provider).then(function(result) {
-      var user = result.user;
-      console.log('Login successfully!', user);
-    }).catch(function(error) {
-      console.log('Failed!', error);
-    });
+    Actions.login();
+    this.props.hidePopup();
   };
 
   render() {
