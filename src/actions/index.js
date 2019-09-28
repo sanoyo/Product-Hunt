@@ -1,5 +1,6 @@
 import alt from '../alt';
 import Firebase from 'firebase';
+import _ from 'lodash';
 
 // TODO 環境変数で使用する。
 // Firebaseのconfig設定する。
@@ -68,7 +69,7 @@ class Actions {
   getProducts() {
     return(dispatch) => {
       Firebase.database().ref('products').on('value', function(snapshot) {
-        var products = snapshot.val();
+        var products = _.values(snapshot.val());
         dispatch(products);
       });
     }
