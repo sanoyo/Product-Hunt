@@ -1,6 +1,7 @@
 import alt from '../alt';
 import Firebase from 'firebase';
 import _ from 'lodash';
+import ProductItem from '../react-components/Product/ProductItem';
 
 // TODO 環境変数で使用する。
 // Firebaseのconfig設定する。
@@ -69,7 +70,12 @@ class Actions {
   getProducts() {
     return(dispatch) => {
       Firebase.database().ref('products').on('value', function(snapshot) {
-        var products = _.values(snapshot.val());
+        var products = _(productValue).keys().map((productKey) => {
+          var item = _.clone(productValue[productKey]);
+          item.key = ProductKey;
+          return item
+        })
+        .value()
         dispatch(products);
       });
     }
@@ -78,6 +84,18 @@ class Actions {
   addProduct(product) {
     return (dispatch) => {
       Firebase.database().ref('products').push(product);
+    }
+  }
+
+  addVote(productId, userId) {
+    return (dispatch) => {
+      var firebaseRef = Firebase.database().ref('products/' + productId + '/upvote');
+
+      var vote = 0;
+      firebaseRef.on('value', function(snapshot) {
+        vote = snapshot.val();
+      });
+      firebaseRef.set(vote+1)
     }
   }
 }
