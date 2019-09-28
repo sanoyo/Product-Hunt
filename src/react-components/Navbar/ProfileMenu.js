@@ -1,4 +1,6 @@
 import React from 'react';
+import Actions from '../../actions';
+
 
 class ProfileMenu extends React.Component {
   constructor() {
@@ -22,6 +24,11 @@ class ProfileMenu extends React.Component {
     }
   };
 
+  handleLogout = (e) => {
+    e.preventDefault();
+    Actions.logout();
+  }
+
   componentWillMount() {
     window.addEventListener("click", this.handleClickOutsite, false);
   }
@@ -30,12 +37,11 @@ class ProfileMenu extends React.Component {
     window.addEventListener("click", this.handleClickOutsite, true);
   }
 
-
   renderProfileNav() {
     return (
       <nav className="profile-nav" ref="profileNav">
         <a href="#">My Profile</a>
-        <a href="#">Logout</a>
+        <a href="#" onClick={this.handleLogout}>Logout</a>
       </nav>
     );
   }

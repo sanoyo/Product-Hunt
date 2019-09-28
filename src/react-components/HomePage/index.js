@@ -1,39 +1,23 @@
 import React from 'react';
 import ProductList from '../Product/ProductList';
-import Firebase from 'firebase'
-
-// TODO 環境変数で使用する。
-// Firebaseのconfig設定する。
-var config = {
-  apiKey: "product-hunt",
-  authDomain: "product-hunt",
-  databaseURL: "product-hunt.com",
-  projectId: "product-hunt",
-  storageBucket: "product-hunt.com",
-  messagingSenderId: "product-hunt",
-  appId: "product-hunt"
-};
-
-// Firebaseを初期化する。
-Firebase.initializeApp(config);
+import connectToStores from 'alt-utils/lib/connectToStores';
+import ProductStore from '../../stores/ProductStore';
+import Actions from '../../actions';
 
 
+@connectToStores
 class HomePage extends React.Component {
   constructor() {
     super();
-    this.state = {
-      productList: []
-    }
+    Actions.getProducts();
+  }
 
-    Firebase.database().ref('products').on('value', (snapshot) => {
-      // Firebaseからデータを取得する。
-      var products = snapshot.val();
-      console.log(products)
+  static getStores() {
+    return [ProductStore];
+  }
 
-      this.setState({
-        productList: products
-      })
-    });
+  static getPropsFromStores() {
+    return ProductStore.getState();
   }
 
   render() {
@@ -46,9 +30,9 @@ class HomePage extends React.Component {
         <section>
           <section className="container">
             {
-              this.state.productList
+              this.props.products
               ?
-              <ProductList productList={this.state.productList} />
+              <ProductList productList={this.props.products} />
               :
               null
             }
